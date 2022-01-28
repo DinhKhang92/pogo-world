@@ -3,6 +3,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:pogo_world/config/colors.dart';
 import 'package:pogo_world/config/theme.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
 
@@ -40,7 +42,9 @@ class _LandingPageState extends State<LandingPage> {
             ],
           ),
         ),
-        child: const Center(child: Text("Pokédex")),
+        child: Center(
+          child: Text(AppLocalizations.of(context)!.landingPageCardLabelPokedex),
+        ),
       ),
     );
   }
