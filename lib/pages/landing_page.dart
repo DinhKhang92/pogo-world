@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:pogo_world/config/colors.dart';
+import 'package:pogo_world/config/theme.dart';
 
 class LandingPage extends StatefulWidget {
-  const LandingPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const LandingPage({Key? key}) : super(key: key);
 
   @override
   State<LandingPage> createState() => _LandingPageState();
@@ -14,14 +15,33 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Title",
-          style: TextStyle(color: Colors.black),
+        leading: IconButton(
+          icon: const Icon(MdiIcons.text),
+          onPressed: () => {},
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
       ),
-      body: const Text("Hello world"),
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    return Center(
+      child: Container(
+        height: 90,
+        width: 200,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(kbCardBorderRadius)),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              kcPokedexColorGradientOne,
+              kcPokedexColorGradientTwo,
+            ],
+          ),
+        ),
+        child: const Center(child: Text("Pokédex")),
+      ),
     );
   }
 }
