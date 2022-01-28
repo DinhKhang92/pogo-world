@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pogo_world/config/colors.dart';
-import 'package:pogo_world/pages/landing_page.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pogo_world/routes/route_generator.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
           elevation: 0.0,
         ),
       ),
-      home: const LandingPage(),
+      initialRoute: Routes.landingPage,
+      onGenerateRoute: RouteGenerator.generateRoute,
       supportedLocales: const [
         Locale('en', ''),
       ],
