@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pogo_world/config/colors.dart';
 import 'package:pogo_world/config/theme.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pogo_world/cubit/pokedex_cubit.dart';
 import 'package:pogo_world/routes/route_generator.dart';
 
 class LandingPage extends StatefulWidget {
@@ -14,6 +16,16 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+  @override
+  void initState() {
+    fetchPokemon();
+    super.initState();
+  }
+
+  Future<void> fetchPokemon() async {
+    BlocProvider.of<PokedexCubit>(context).getPokemon();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +46,9 @@ class _LandingPageState extends State<LandingPage> {
         child: Container(
           height: 90,
           width: 200,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(kbCardBorderRadius)),
-            gradient: LinearGradient(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(kbCardBorderRadius),
+            gradient: const LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
