@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pogo_world/config/colors.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pogo_world/config/theme.dart';
 import 'package:pogo_world/cubit/pokedex_cubit.dart';
 import 'package:pogo_world/provider/pokemon_provider.dart';
 import 'package:pogo_world/repository/pokemon_repository.dart';
@@ -38,6 +39,8 @@ class MyApp extends StatelessWidget {
             backgroundColor: kcTransparentColor,
             elevation: 0.0,
           ),
+          inputDecorationTheme: ktInputDecorationTheme,
+          textSelectionTheme: ktTextSelectionTheme,
         ),
         initialRoute: Routes.landingPage,
         onGenerateRoute: RouteGenerator.generateRoute,
