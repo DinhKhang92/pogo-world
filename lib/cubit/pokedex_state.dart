@@ -7,7 +7,7 @@ abstract class PokedexState extends Equatable {
   const PokedexState({required this.pokemon, required this.filteredPokemon});
 
   @override
-  List<Object> get props => [pokemon];
+  List<Object> get props => [pokemon, filteredPokemon];
 }
 
 class PokedexInitial extends PokedexState {
