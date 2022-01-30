@@ -2,5 +2,9 @@
     "@landingPageCardLabelPokedex": {
         "description": "landing page card label - pokedex"
     },
-    "landingPageCardLabelPokedex": "Pokédex"
+    "landingPageCardLabelPokedex": "Pokédex",
+    "@pokedexPageSearchbarHintText": {
+        "description": "pokedex page search bar hint text"
+    },
+    "pokedexPageSearchbarHintText": "Search Pokémon ..."
 }

@@ -6,11 +6,17 @@ part 'pokedex_state.dart';
 
 class PokedexCubit extends Cubit<PokedexState> {
   final PokemonRepository pokemonRepository;
-  PokedexCubit({required this.pokemonRepository}) : super(const PokedexInitial(pokedex: {}));
+  PokedexCubit({required this.pokemonRepository}) : super(const PokedexInitial(pokemon: {}, filteredPokemon: {}));
 
   Future<void> getPokemon() async {
-    emit(PokedexLoading(pokedex: state.pokedex));
+    emit(PokedexLoading(pokemon: state.pokemon, filteredPokemon: state.filteredPokemon));
     final Map pokemon = await pokemonRepository.getReleasedPokemon();
-    emit(PokedexLoaded(pokedex: pokemon));
+    emit(PokedexLoaded(pokemon: pokemon, filteredPokemon: state.filteredPokemon));
+  }
+
+  void searchPokemon(String substring) {
+    emit(PokedexLoading(pokemon: state.pokemon, filteredPokemon: state.filteredPokemon));
+    final Map filteredPokemon = pokemonRepository.searchPokemon({...state.pokemon}, substring);
+    emit(PokedexLoaded(pokemon: state.pokemon, filteredPokemon: filteredPokemon));
   }
 }
