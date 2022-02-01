@@ -7,6 +7,7 @@ import 'package:pogo_world/config/spacing.dart';
 import 'package:pogo_world/config/theme.dart';
 import 'package:pogo_world/cubit/pokedex_cubit.dart';
 import 'package:pogo_world/extensions/generation.dart';
+import 'package:pogo_world/models/pokemon.dart';
 import 'package:pogo_world/models/pokemon_page_args.dart';
 import 'package:pogo_world/routes/route_generator.dart';
 import 'package:pogo_world/utils/get_unreleased_pokemon_count.dart';
@@ -22,6 +23,12 @@ class PokedexPage extends StatefulWidget {
 class _PokedexPageState extends State<PokedexPage> {
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _searchFieldController = TextEditingController();
+
+  @override
+  void initState() {
+    BlocProvider.of<PokedexCubit>(context).clearFilteredPokemon();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,13 +109,14 @@ class _PokedexPageState extends State<PokedexPage> {
               ),
               itemCount: state.filteredPokemon.isEmpty ? state.pokemon.length : state.filteredPokemon.length,
               itemBuilder: (context, index) {
-                final String id = state.filteredPokemon.isEmpty ? state.pokemon.keys.elementAt(index) : state.filteredPokemon.keys.elementAt(index);
+                final Pokemon pokemon = state.filteredPokemon.isEmpty ? state.pokemon[index] : state.filteredPokemon[index];
+                final int id = pokemon.id;
                 final String imageUrl = 'assets/pokemon/$id.png';
 
                 return InkWell(
-                  onTap: () => Navigator.of(context).pushNamed(Routes.pokemonPage, arguments: PokemonPageArgs(id: int.parse(id))),
+                  onTap: () => Navigator.of(context).pushNamed(Routes.pokemonPage, arguments: PokemonPageArgs(pokemon: pokemon)),
                   child: Hero(
-                    tag: id,
+                    tag: "$id",
                     child: Container(
                       padding: const EdgeInsets.all(Spacing.xs),
                       decoration: BoxDecoration(
@@ -118,6 +126,7 @@ class _PokedexPageState extends State<PokedexPage> {
                       child: Center(
                         child: Image.asset(
                           imageUrl,
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ),

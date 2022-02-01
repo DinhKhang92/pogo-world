@@ -19,7 +19,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const PokedexPage());
       case Routes.pokemonPage:
         final PokemonPageArgs args = settings.arguments as PokemonPageArgs;
-        return MaterialPageRoute(builder: (_) => PokemonPage(id: args.id));
+        return MaterialPageRoute(builder: (_) => PokemonPage(pokemon: args.pokemon));
       default:
         return _errorRoute();
     }

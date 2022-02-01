@@ -1,8 +1,8 @@
 part of 'pokedex_cubit.dart';
 
 abstract class PokedexState extends Equatable {
-  final Map pokemon;
-  final Map filteredPokemon;
+  final List<Pokemon> pokemon;
+  final List<Pokemon> filteredPokemon;
 
   const PokedexState({required this.pokemon, required this.filteredPokemon});
 
@@ -11,17 +11,17 @@ abstract class PokedexState extends Equatable {
 }
 
 class PokedexInitial extends PokedexState {
-  const PokedexInitial({required Map pokemon, required Map filteredPokemon}) : super(pokemon: pokemon, filteredPokemon: filteredPokemon);
+  const PokedexInitial({required List<Pokemon> pokemon, required List<Pokemon> filteredPokemon}) : super(pokemon: pokemon, filteredPokemon: filteredPokemon);
 }
 
 class PokedexLoading extends PokedexState {
-  const PokedexLoading({required Map pokemon, required Map filteredPokemon}) : super(pokemon: pokemon, filteredPokemon: filteredPokemon);
+  const PokedexLoading({required List<Pokemon> pokemon, required List<Pokemon> filteredPokemon}) : super(pokemon: pokemon, filteredPokemon: filteredPokemon);
 }
 
 class PokedexLoaded extends PokedexState {
-  const PokedexLoaded({required Map pokemon, required Map filteredPokemon}) : super(pokemon: pokemon, filteredPokemon: filteredPokemon);
+  const PokedexLoaded({required List<Pokemon> pokemon, required List<Pokemon> filteredPokemon}) : super(pokemon: pokemon, filteredPokemon: filteredPokemon);
 }
 
 class PokedexError extends PokedexState {
-  PokedexError() : super(pokemon: {}, filteredPokemon: {});
+  PokedexError() : super(pokemon: [], filteredPokemon: []);
 }
