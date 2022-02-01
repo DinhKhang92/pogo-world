@@ -68,6 +68,7 @@ flutter:
     - assets/mocks/
     - assets/pokemon/
     - assets/pokedex/
+    - assets/types/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
