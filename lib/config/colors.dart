@@ -11,6 +11,7 @@ const Color kcWhiteColor = Color(0xffffffff);
 
 const Color kcTypeBugColor = Color(0xff9ebf4a);
 const Color kcTypeDarkColor = Color(0xff5e5b6c);
+const Color kcTypeDragonColor = Color(0xff3074b9);
 const Color kcTypeElectricColor = Color(0xfff2d869);
 const Color kcTypeFairyColor = Color(0xffe099df);
 const Color kcTypeFightingColor = Color(0xffe099df);

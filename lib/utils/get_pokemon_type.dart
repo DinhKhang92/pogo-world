@@ -6,6 +6,8 @@ PokemonType getPokemonType(String type) {
       return PokemonType.bug;
     case "Dark":
       return PokemonType.dark;
+    case "Dragon":
+      return PokemonType.dragon;
     case "Electric":
       return PokemonType.electric;
     case "Fairy":

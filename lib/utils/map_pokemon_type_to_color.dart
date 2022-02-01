@@ -8,6 +8,8 @@ Color mapPokemonTypeToColor(PokemonType type) {
       return kcTypeBugColor;
     case PokemonType.dark:
       return kcTypeDarkColor;
+    case PokemonType.dragon:
+      return kcTypeDragonColor;
     case PokemonType.electric:
       return kcTypeElectricColor;
     case PokemonType.fairy:

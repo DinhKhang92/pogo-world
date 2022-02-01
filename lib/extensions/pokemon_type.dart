@@ -1,6 +1,7 @@
 enum PokemonType {
   bug,
   dark,
+  dragon,
   electric,
   fairy,
   fighting,
