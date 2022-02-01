@@ -33,7 +33,7 @@ class PokemonRepository {
           "id": int.parse(id),
           "name": releasedPokemonData[id]["name"],
           "form": typeData["form"],
-          "type": pokemonTypes,
+          "types": pokemonTypes,
         });
       },
     ).toList();
