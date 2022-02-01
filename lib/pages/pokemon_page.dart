@@ -23,73 +23,86 @@ class _PokemonPageState extends State<PokemonPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: Stack(
         children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: RadialGradient(
-                  colors: [
-                    mapPokemonTypeToColor(widget.pokemon.type.first).withOpacity(0.5),
-                    kcBackgroundColor.withOpacity(0.2),
-                  ],
-                  radius: 0.6,
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Hero(
-                    tag: "${widget.pokemon.id}",
-                    child: Image.asset(imageUrl),
-                  ),
-                  const SizedBox(height: Spacing.l),
-                  Text(
-                    widget.pokemon.name,
-                    style: const TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(height: Spacing.m),
-                  Wrap(
-                    spacing: Spacing.xs,
-                    children: widget.pokemon.type.map((PokemonType type) {
-                      final String typeImageUrl = 'assets/types/${type.name}.png';
+          _buildRadialGradientBackground(),
+          _buildPokemonBanner(imageUrl),
+        ],
+      ),
+    );
+  }
 
-                      return Container(
-                        padding: const EdgeInsets.symmetric(horizontal: Spacing.m, vertical: Spacing.xxs),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: mapPokemonTypeToColor(type)),
-                          borderRadius: BorderRadius.circular(kbGridTileBorderRadius),
-                        ),
-                        child: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          spacing: Spacing.xs,
-                          children: [
-                            Image.asset(
-                              typeImageUrl,
-                              height: 14,
-                            ),
-                            Text(type.name.capitalize(), style: TextStyle(color: mapPokemonTypeToColor(type))),
-                          ],
-                        ),
-                      );
-                    }).toList(),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(),
+  Widget _buildPokemonBanner(String imageUrl) {
+    return Align(
+      alignment: const Alignment(0.0, -0.4),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Column(
+            children: [
+              _buildPokemonImage(imageUrl),
+              const SizedBox(height: Spacing.l),
+              _buildPokemonName(),
+              const SizedBox(height: Spacing.m),
+              _buildPokemonType(),
+            ],
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildRadialGradientBackground() {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: RadialGradient(
+          center: const Alignment(0.0, -0.4),
+          colors: [
+            mapPokemonTypeToColor(widget.pokemon.types.first).withOpacity(0.5),
+            kcBackgroundColor.withOpacity(0.2),
+          ],
+          radius: 0.6,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPokemonType() {
+    return Wrap(
+      spacing: Spacing.xs,
+      children: widget.pokemon.types.map((PokemonType type) {
+        final String typeImageUrl = 'assets/types/${type.name}.png';
+
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: Spacing.m, vertical: Spacing.xxs),
+          decoration: BoxDecoration(
+            border: Border.all(color: mapPokemonTypeToColor(type)),
+            borderRadius: BorderRadius.circular(kbGridTileBorderRadius),
+          ),
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: Spacing.xs,
+            children: [
+              Image.asset(typeImageUrl, height: 14),
+              Text(type.name.capitalize(), style: TextStyle(color: mapPokemonTypeToColor(type))),
+            ],
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildPokemonName() {
+    return Text(
+      widget.pokemon.name,
+      style: Theme.of(context).textTheme.caption,
+    );
+  }
+
+  Widget _buildPokemonImage(String imageUrl) {
+    return Hero(
+      tag: "${widget.pokemon.id}",
+      child: Image.asset(imageUrl),
     );
   }
 }
