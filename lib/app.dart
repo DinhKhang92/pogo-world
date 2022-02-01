@@ -41,6 +41,13 @@ class MyApp extends StatelessWidget {
           ),
           inputDecorationTheme: ktInputDecorationTheme,
           textSelectionTheme: ktTextSelectionTheme,
+          textTheme: const TextTheme(
+            caption: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.w500,
+              color: kcWhiteColor,
+            ),
+          ),
         ),
         initialRoute: Routes.landingPage,
         onGenerateRoute: RouteGenerator.generateRoute,
