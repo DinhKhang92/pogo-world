@@ -76,12 +76,15 @@ class _PokemonPageState extends State<PokemonPage> {
                         // ),
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: Spacing.m, vertical: Spacing.l),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: _buildPokemonDataNavigationItems(),
+                            SingleChildScrollView(
+                              physics: const ClampingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: Spacing.m, vertical: Spacing.l),
+                                child: Wrap(
+                                  spacing: Spacing.xs,
+                                  children: _buildPokemonDataNavigationItems(),
+                                ),
                               ),
                             ),
                           ],
@@ -170,7 +173,8 @@ class _PokemonPageState extends State<PokemonPage> {
       AppLocalizations.of(context)!.pokemonPageDataNavigationLabelAbout,
       AppLocalizations.of(context)!.pokemonPageDataNavigationLabelStats,
       AppLocalizations.of(context)!.pokemonPageDataNavigationLabelMoves,
-      AppLocalizations.of(context)!.pokemonPageDataNavigationLabelEvolutions
+      AppLocalizations.of(context)!.pokemonPageDataNavigationLabelEvolutions,
+      AppLocalizations.of(context)!.pokemonPageDataNavigationLabelLocation
     ];
     final Map<int, String> pokemonDataNavigationItemLabelsMap = pokemonDataNavigationItemLabels.asMap();
 
