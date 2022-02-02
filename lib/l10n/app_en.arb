@@ -6,5 +6,21 @@
     "@pokedexPageSearchbarHintText": {
         "description": "pokedex page search bar hint text"
     },
-    "pokedexPageSearchbarHintText": "Search Pokémon ..."
+    "pokedexPageSearchbarHintText": "Search Pokémon ...",
+    "@pokemonPageDataNavigationLabelAbout": {
+        "description": "pokemon page data navigation label - About"
+    },
+    "pokemonPageDataNavigationLabelAbout": "About",
+    "@pokemonPageDataNavigationLabelStats": {
+        "description": "pokemon page data navigation label - Stats"
+    },
+    "pokemonPageDataNavigationLabelStats": "Stats",
+    "@pokemonPageDataNavigationLabelMoves": {
+        "description": "pokemon page data navigation label - Moves"
+    },
+    "pokemonPageDataNavigationLabelMoves": "Moves",
+    "@pokemonPageDataNavigationLabelEvolutions": {
+        "description": "pokemon page data navigation label - Evolutions"
+    },
+    "pokemonPageDataNavigationLabelEvolutions": "Evolutions"
 }

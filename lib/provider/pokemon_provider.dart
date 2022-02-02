@@ -3,9 +3,15 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 class PokemonProvider {
-  Future<Map> fetchReleasedPokemon() async {
+  Future<Map<String, dynamic>> fetchReleasedPokemon() async {
     final String response = await rootBundle.loadString('assets/mocks/released_pokemon.json');
-    final dynamic data = await json.decode(response);
-    return data as Map;
+    final Map<String, dynamic> data = await json.decode(response);
+    return data;
+  }
+
+  Future<List> fetchPokemonTypes() async {
+    final String response = await rootBundle.loadString('assets/mocks/pokemon_types.json');
+    final List data = await json.decode(response);
+    return data;
   }
 }
