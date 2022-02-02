@@ -26,29 +26,89 @@ class _PokemonPageState extends State<PokemonPage> {
       body: Stack(
         children: [
           _buildRadialGradientBackground(),
-          _buildPokemonBanner(imageUrl),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Expanded(
+                // child: Container(
+                //   color: Colors.red,
+                // ),
+                child: Align(alignment: const Alignment(0.0, 0.6), child: _buildPokemonBanner(imageUrl)),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.5,
+                child: DraggableScrollableSheet(
+                  initialChildSize: 1.0,
+                  maxChildSize: 1.0,
+                  minChildSize: 1.0,
+                  builder: (context, scrollController) {
+                    return SingleChildScrollView(
+                      physics: const ClampingScrollPhysics(),
+                      controller: scrollController,
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        // color: Colors.red,
+                        // decoration: BoxDecoration(
+                        //   gradient: LinearGradient(
+                        //     colors: [
+                        //       kcBackgroundColor.withOpacity(0.01),
+                        //       Colors.grey.withOpacity(0.1),
+                        //     ],
+                        //     begin: Alignment.bottomCenter,
+                        //     end: Alignment.topCenter,
+                        //   ),
+                        //   borderRadius: const BorderRadius.all(
+                        //     Radius.circular(40),
+                        //   ),
+                        // ),
+                        child: Column(
+                          children: [
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Container(
+                                color: Colors.red,
+                                child: Wrap(
+                                  runAlignment: WrapAlignment.spaceBetween,
+                                  spacing: Spacing.xxl,
+                                  children: const [
+                                    Text("About"),
+                                    Text("Stats"),
+                                    Text("Moves"),
+                                    Text("Evolution"),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
 
   Widget _buildPokemonBanner(String imageUrl) {
-    return Align(
-      alignment: const Alignment(0.0, -0.4),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Column(
-            children: [
-              _buildPokemonImage(imageUrl),
-              const SizedBox(height: Spacing.l),
-              _buildPokemonName(),
-              const SizedBox(height: Spacing.m),
-              _buildPokemonType(),
-            ],
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Column(
+          children: [
+            _buildPokemonImage(imageUrl),
+            const SizedBox(height: Spacing.l),
+            _buildPokemonName(),
+            const SizedBox(height: Spacing.m),
+            _buildPokemonType(),
+          ],
+        ),
+      ],
     );
   }
 
