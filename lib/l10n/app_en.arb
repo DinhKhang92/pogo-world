@@ -22,5 +22,9 @@
     "@pokemonPageDataNavigationLabelEvolutions": {
         "description": "pokemon page data navigation label - Evolutions"
     },
-    "pokemonPageDataNavigationLabelEvolutions": "Evolutions"
+    "pokemonPageDataNavigationLabelEvolutions": "Evolutions",
+    "@pokemonPageDataNavigationLabelLocation": {
+        "description": "pokemon page data navigation label - Location"
+    },
+    "pokemonPageDataNavigationLabelLocation": "Location"
 }
