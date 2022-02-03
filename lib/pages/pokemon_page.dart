@@ -3,13 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pogo_world/config/colors.dart';
 import 'package:pogo_world/config/spacing.dart';
 import 'package:pogo_world/config/theme.dart';
+import 'package:pogo_world/cubit/pokedex_cubit.dart';
 import 'package:pogo_world/cubit/selector_cubit.dart';
 import 'package:pogo_world/extensions/capitalize.dart';
 import 'package:pogo_world/extensions/pokemon_type.dart';
 import 'package:pogo_world/models/pokemon.dart';
+import 'package:pogo_world/utils/get_max_stats.dart';
 import 'package:pogo_world/utils/map_pokemon_type_to_color.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pogo_world/widgets/rounded_progress_bar.dart';
 
 class PokemonPage extends StatefulWidget {
   final Pokemon pokemon;
@@ -75,6 +78,7 @@ class _PokemonPageState extends State<PokemonPage> {
                         //   borderRadius: const BorderRadius.all(Radius.circular(40)),
                         // ),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SingleChildScrollView(
                               physics: const ClampingScrollPhysics(),
@@ -87,6 +91,16 @@ class _PokemonPageState extends State<PokemonPage> {
                                 ),
                               ),
                             ),
+                            const SizedBox(height: Spacing.xxxs),
+                            BlocBuilder<SelectorCubit, SelectorState>(
+                              builder: (context, state) {
+                                if (state.pokemonDataSelectorIndex == 1) {
+                                  return _buildStatsSection();
+                                }
+
+                                return const SizedBox.shrink();
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -95,6 +109,70 @@ class _PokemonPageState extends State<PokemonPage> {
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  BlocBuilder<PokedexCubit, PokedexState> _buildStatsSection() {
+    return BlocBuilder<PokedexCubit, PokedexState>(
+      builder: (context, state) {
+        final int maxAttack = getMaxBaseAttack(state.pokemon);
+        final int maxDefense = getMaxBaseDefense(state.pokemon);
+        final int maxStamina = getMaxBaseStamina(state.pokemon);
+
+        return Column(
+          children: [
+            _buildStatsBar(
+              AppLocalizations.of(context)!.pokemonPageDataAttackLabel,
+              widget.pokemon.baseAttack,
+              widget.pokemon.baseAttack / maxAttack,
+            ),
+            const SizedBox(height: Spacing.s),
+            _buildStatsBar(
+              AppLocalizations.of(context)!.pokemonPageDataDefenseLabel,
+              widget.pokemon.baseDefense,
+              widget.pokemon.baseDefense / maxDefense,
+            ),
+            const SizedBox(height: Spacing.s),
+            _buildStatsBar(
+              AppLocalizations.of(context)!.pokemonPageDataStaminaLabel,
+              widget.pokemon.baseStamina,
+              widget.pokemon.baseStamina / maxStamina,
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildStatsBar(String label, int statsValue, double percent) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 2 * Spacing.m),
+      child: Row(
+        children: [
+          Container(
+            constraints: const BoxConstraints(minWidth: 30),
+            child: Text(
+              label,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          const SizedBox(width: Spacing.xl),
+          Container(
+            constraints: const BoxConstraints(minWidth: 30),
+            child: Text(
+              "$statsValue",
+              style: Theme.of(context).textTheme.subtitle2,
+            ),
+          ),
+          const SizedBox(width: Spacing.xl),
+          Expanded(
+            child: RoundedProgressBar(
+              percent: percent,
+              color: mapPokemonTypeToColor(widget.pokemon.types.first),
+            ),
           ),
         ],
       ),
@@ -200,15 +278,11 @@ class _PokemonPageState extends State<PokemonPage> {
                         ),
                         index == state.pokemonDataSelectorIndex
                             ? Container(
+                                height: 3,
                                 width: 20,
-                                height: 5,
-                                decoration: const BoxDecoration(
-                                  border: Border(
-                                    bottom: BorderSide(
-                                      width: 3,
-                                      color: kcWhiteColor,
-                                    ),
-                                  ),
+                                decoration: BoxDecoration(
+                                  color: kcWhiteColor,
+                                  borderRadius: BorderRadius.circular(kbPokemonInfoNavigationBorderRadius),
                                 ),
                               )
                             : const SizedBox.shrink(),

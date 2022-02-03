@@ -9,6 +9,7 @@ const Color kcHintColor = Color(0xff4E4E4E);
 const Color kcLightGrayColor = Color(0xff9e9e9e);
 const Color kcGrayColor = Color(0xff2c2b2b);
 const Color kcWhiteColor = Color(0xffffffff);
+const Color kcProgressBarBackgroundColor = Color(0xff444949);
 
 const Color kcTypeBugColor = Color(0xff9ebf4a);
 const Color kcTypeDarkColor = Color(0xff5e5b6c);

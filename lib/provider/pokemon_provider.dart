@@ -14,4 +14,10 @@ class PokemonProvider {
     final List data = await json.decode(response);
     return data;
   }
+
+  Future<List> fetchPokemonStats() async {
+    final String response = await rootBundle.loadString('assets/mocks/pokemon_stats.json');
+    final List data = await json.decode(response);
+    return data;
+  }
 }
