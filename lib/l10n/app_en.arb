@@ -26,5 +26,17 @@
     "@pokemonPageDataNavigationLabelLocation": {
         "description": "pokemon page data navigation label - Location"
     },
-    "pokemonPageDataNavigationLabelLocation": "Location"
+    "pokemonPageDataNavigationLabelLocation": "Location",
+    "@pokemonPageDataAttackLabel": {
+        "description": "pokemon page data label - Attack"
+    },
+    "pokemonPageDataAttackLabel": "ATK",
+    "@pokemonPageDataDefenseLabel": {
+        "description": "pokemon page data label - Defense"
+    },
+    "pokemonPageDataDefenseLabel": "DEF",
+    "@pokemonPageDataStaminaLabel": {
+        "description": "pokemon page data label - Stamina"
+    },
+    "pokemonPageDataStaminaLabel": "HP"
 }
