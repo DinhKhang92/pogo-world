@@ -59,7 +59,7 @@ class _PokedexPageState extends State<PokedexPage> {
   Widget _buildSearchbar() {
     return Container(
       decoration: BoxDecoration(
-        color: kcGrayColor,
+        color: kcDarkGrayColor,
         borderRadius: BorderRadius.circular(kbGridTileBorderRadius),
       ),
       child: TextField(
@@ -107,9 +107,9 @@ class _PokedexPageState extends State<PokedexPage> {
                 crossAxisSpacing: Spacing.xxs,
                 mainAxisSpacing: Spacing.xxs,
               ),
-              itemCount: state.filteredPokemon.isEmpty ? state.pokemon.length : state.filteredPokemon.length,
+              itemCount: state.filteredPokemon.isEmpty && _searchFieldController.text.isEmpty ? state.pokemon.length : state.filteredPokemon.length,
               itemBuilder: (context, index) {
-                final Pokemon pokemon = state.filteredPokemon.isEmpty ? state.pokemon[index] : state.filteredPokemon[index];
+                final Pokemon pokemon = state.filteredPokemon.isEmpty && _searchFieldController.text.isEmpty ? state.pokemon[index] : state.filteredPokemon[index];
                 final int id = pokemon.id;
                 final String imageUrl = 'assets/pokemon/$id.png';
 

@@ -50,5 +50,9 @@
     "@pokemonPageDataEffectivenessMultiplierLabel2x": {
         "description": "pokemon page data effectiveness multiplier label - 2x"
     },
-    "pokemonPageDataEffectivenessMultiplierLabel2x": "2x"
+    "pokemonPageDataEffectivenessMultiplierLabel2x": "2x",
+    "@pokemonPageDataEffectivenessMultiplierLabel3x": {
+        "description": "pokemon page data effectiveness multiplier label - 3x"
+    },
+    "pokemonPageDataEffectivenessMultiplierLabel3x": "3x"
 }

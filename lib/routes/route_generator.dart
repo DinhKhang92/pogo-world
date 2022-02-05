@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pogo_world/models/pokemon_page_args.dart';
 import 'package:pogo_world/pages/landing_page.dart';
 import 'package:pogo_world/pages/pokedex_page.dart';
-import 'package:pogo_world/pages/pokemon_page.dart';
+import 'package:pogo_world/pages/pokemon_page/pokemon_page.dart';
 
 class Routes {
   static const String landingPage = '/';

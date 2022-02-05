@@ -41,6 +41,11 @@ class MyApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             backgroundColor: kcTransparentColor,
             elevation: 0.0,
+            titleTextStyle: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              color: kcWhiteColor,
+            ),
           ),
           inputDecorationTheme: ktInputDecorationTheme,
           textSelectionTheme: ktTextSelectionTheme,

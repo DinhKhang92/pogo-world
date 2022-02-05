@@ -26,7 +26,7 @@ class PokemonRepository {
         final Map<String, int> parsedPokemonStatsData = _parsePokemonStats(pokemonStatsData, id, form);
 
         final Map<String, List<PokemonType>> parsedPokemonWeaknesses = _parsePokemonWeaknesses(pokemonTypeEffectivenessData, pokemonTypes);
-        final Map<String, List<PokemonType>> parsedPokemonResistances = _parsePokemonResistances(pokemonTypeEffectivenessData, pokemonTypes);
+        final Map<String, List<PokemonType>> parsedPokemonResistances = _parsePokemonResistances(pokemonTypeEffectivenessData, pokemonTypes, id);
         final Map<String, List<PokemonType>> filteredEffectiveness = _filterEffectiveness(parsedPokemonWeaknesses, parsedPokemonResistances);
 
         return Pokemon.fromJSON({
@@ -54,7 +54,10 @@ class PokemonRepository {
       return [];
     }
 
-    return releasedPokemon.where((Pokemon pokemon) => pokemon.name.toLowerCase().contains(substring.toLowerCase())).toList();
+    final List<Pokemon> foundPokemon = releasedPokemon.where((Pokemon pokemon) {
+      return pokemon.name.toLowerCase().contains(substring.toLowerCase()) || pokemon.id.toString().contains(substring);
+    }).toList();
+    return foundPokemon;
   }
 
   Map _parsePokemonTypes(List pokemonTypesData, String id) {
@@ -113,7 +116,7 @@ class PokemonRepository {
     };
   }
 
-  Map<String, List<PokemonType>> _parsePokemonResistances(Map pokemonTypeEffectivenessData, List<PokemonType> pokemonTypes) {
+  Map<String, List<PokemonType>> _parsePokemonResistances(Map pokemonTypeEffectivenessData, List<PokemonType> pokemonTypes, String id) {
     final List<PokemonType> resistances = [];
     final List<PokemonType> doubleResistances = [];
     final List<PokemonType> tripleResistances = [];
@@ -129,6 +132,16 @@ class PokemonRepository {
       resistances.addAll(mappedResistances);
       doubleResistances.addAll(mappedDoubleResistances);
     }
+
+    final List<PokemonType> deleteTripleResistanceFields = [];
+    for (PokemonType doubleResistance in doubleResistances) {
+      if (resistances.contains(doubleResistance)) {
+        deleteTripleResistanceFields.add(doubleResistance);
+        tripleResistances.add(doubleResistance);
+      }
+    }
+    doubleResistances.removeAll(deleteTripleResistanceFields);
+    resistances.removeAll(deleteTripleResistanceFields);
 
     doubleResistances.addAll(resistances.getDuplicates());
 
