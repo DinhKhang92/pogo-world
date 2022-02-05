@@ -4,8 +4,9 @@ import 'package:pogo_world/config/spacing.dart';
 
 const double kbCardBorderRadius = 15.0;
 const double kbGridTileBorderRadius = 10.0;
-const double kbPokemonInfoBorderRadius = 45.0;
+const double kbPokemonInfoBorderRadius = 25.0;
 const double kbPokemonInfoNavigationBorderRadius = 10.0;
+const double kbPokemonInfoEffectivenessMultiplierBorderRadius = 10.0;
 
 const TextSelectionThemeData ktTextSelectionTheme = TextSelectionThemeData(
   cursorColor: kcWhiteColor,

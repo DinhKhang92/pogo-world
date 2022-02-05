@@ -38,5 +38,21 @@
     "@pokemonPageDataStaminaLabel": {
         "description": "pokemon page data label - Stamina"
     },
-    "pokemonPageDataStaminaLabel": "HP"
+    "pokemonPageDataStaminaLabel": "HP",
+    "@pokemonPageDataWeaknessesLabel": {
+        "description": "pokemon page data weaknesses label - Weaknesses"
+    },
+    "pokemonPageDataWeaknessesLabel": "Weaknesses",
+    "@pokemonPageDataResistancesLabel": {
+        "description": "pokemon page data resistances label - Resistances"
+    },
+    "pokemonPageDataResistancesLabel": "Resistances",
+    "@pokemonPageDataEffectivenessMultiplierLabel2x": {
+        "description": "pokemon page data effectiveness multiplier label - 2x"
+    },
+    "pokemonPageDataEffectivenessMultiplierLabel2x": "2x",
+    "@pokemonPageDataEffectivenessMultiplierLabel3x": {
+        "description": "pokemon page data effectiveness multiplier label - 3x"
+    },
+    "pokemonPageDataEffectivenessMultiplierLabel3x": "3x"
 }
