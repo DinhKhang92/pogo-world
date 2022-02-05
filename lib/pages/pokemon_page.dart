@@ -57,9 +57,9 @@ class _PokemonPageState extends State<PokemonPage> {
               Container(
                 height: MediaQuery.of(context).size.height * 0.5,
                 child: DraggableScrollableSheet(
-                  initialChildSize: 0.8,
+                  initialChildSize: 1.0,
                   maxChildSize: 1.0,
-                  minChildSize: 0.8,
+                  minChildSize: 1.0,
                   builder: (context, scrollController) {
                     return SingleChildScrollView(
                       physics: const ClampingScrollPhysics(),
@@ -123,6 +123,7 @@ class _PokemonPageState extends State<PokemonPage> {
         final int maxStamina = getMaxBaseStamina(state.pokemon);
 
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildStatsBar(
               AppLocalizations.of(context)!.pokemonPageDataAttackLabel,
@@ -141,10 +142,83 @@ class _PokemonPageState extends State<PokemonPage> {
               widget.pokemon.baseStamina,
               widget.pokemon.baseStamina / maxStamina,
             ),
+            const SizedBox(height: Spacing.xl),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2 * Spacing.s),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.pokemonPageDataWeaknessesLabel,
+                    style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.red),
+                  ),
+                  const SizedBox(height: Spacing.xxxs),
+                  Wrap(
+                    spacing: Spacing.xxxs,
+                    runSpacing: Spacing.xxxs,
+                    children: [
+                      ..._buildPokemonEffectiveness(widget.pokemon.doubleWeaknesses, countsDoubled: true),
+                      ..._buildPokemonEffectiveness(widget.pokemon.weaknesses),
+                    ],
+                  ),
+                  const SizedBox(height: Spacing.l),
+                  Text(
+                    AppLocalizations.of(context)!.pokemonPageDataResistancesLabel,
+                    style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.green),
+                  ),
+                  const SizedBox(height: Spacing.xxxs),
+                  Wrap(
+                    spacing: Spacing.xxxs,
+                    runSpacing: Spacing.xxxs,
+                    children: [
+                      ..._buildPokemonEffectiveness(widget.pokemon.doubleResistances, countsDoubled: true),
+                      ..._buildPokemonEffectiveness(widget.pokemon.resistances),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         );
       },
     );
+  }
+
+  List<Widget> _buildPokemonEffectiveness(List<PokemonType> effectivenessList, {bool countsDoubled = false}) {
+    return effectivenessList
+        .map(
+          (PokemonType type) => Stack(
+            alignment: Alignment.topRight,
+            children: [
+              Stack(
+                alignment: Alignment.topRight,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(Spacing.xxs),
+                    child: Image.asset(
+                      'assets/types/${type.name}.png',
+                      height: 32,
+                    ),
+                  ),
+                  countsDoubled
+                      ? Container(
+                          padding: const EdgeInsets.all(1),
+                          decoration: BoxDecoration(
+                            color: kcBackgroundColor,
+                            borderRadius: BorderRadius.circular(kbPokemonInfoEffectivenessMultiplierBorderRadius),
+                          ),
+                          child: Text(
+                            AppLocalizations.of(context)!.pokemonPageDataEffectivenessMultiplierLabel2x,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                ],
+              ),
+            ],
+          ),
+        )
+        .toList();
   }
 
   Widget _buildStatsBar(String label, int statsValue, double percent) {

@@ -20,4 +20,10 @@ class PokemonProvider {
     final List data = await json.decode(response);
     return data;
   }
+
+  Future<Map> fetchTypeEffectiveness() async {
+    final String response = await rootBundle.loadString('assets/mocks/type_effectiveness.json');
+    final Map data = await json.decode(response);
+    return data;
+  }
 }
