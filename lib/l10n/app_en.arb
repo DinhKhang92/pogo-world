@@ -3,6 +3,10 @@
         "description": "landing page card label - pokedex"
     },
     "landingPageCardLabelPokedex": "Pokédex",
+    "@landingPageCardLabelMoves": {
+        "description": "landing page card label - moves"
+    },
+    "landingPageCardLabelMoves": "Moves",
     "@pokedexPageSearchbarHintText": {
         "description": "pokedex page search bar hint text"
     },
