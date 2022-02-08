@@ -7,8 +7,8 @@ import 'package:pogo_world/cubit/selector_cubit.dart';
 import 'package:pogo_world/extensions/capitalize.dart';
 import 'package:pogo_world/extensions/pokemon_type.dart';
 import 'package:pogo_world/models/pokemon.dart';
-import 'package:pogo_world/pages/pokemon_page/widgets/pokemon_data_navigation_section.dart';
-import 'package:pogo_world/pages/pokemon_page/widgets/pokemon_section_stats.dart';
+import 'package:pogo_world/pages/pokedex_page/widgets/pokemon_data_navigation_section.dart';
+import 'package:pogo_world/pages/pokedex_page/widgets/pokemon_section_stats.dart';
 import 'package:pogo_world/utils/map_pokemon_type_to_color.dart';
 import 'package:pogo_world/widgets/radial_gradient_background.dart';
 
